@@ -1,0 +1,7 @@
+/* pages/welcome/welcome.wxss */
+.welcome{
+  text-align: center;
+  margin-top:30rpx;
+  color: green;
+  font-size:60rpx;
+}

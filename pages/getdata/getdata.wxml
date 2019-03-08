@@ -1,0 +1,188 @@
+<!--pages/getdata/getdata.wxml-->
+<view class="container">
+  
+  <view class='xc_section'>
+    <view class='section_info'>
+      <view class='Title'><text class=''>嘉宾行程信息</text></view>
+      <text>尊敬的各位嘉宾：</text>
+      <text class='hello'>您好！</text>
+      <text class='hello'>您能成为我们本次年会的特邀嘉宾，我们深感荣幸，为了能够更好的保障您的出行，这里需要耽误您的宝贵时间来确认您本次会议的行程信息，感谢您的配合！</text>
+    </view>
+    <view class='xc_section'>
+      <text class='wait'>信息已提交成功，请耐心等待！</text>
+    </view>
+    <view class='xc_section xc'>
+      <text class='goTime'>您的行程时间如下：</text>
+      <view class='information'></view>
+    </view>
+    <view class='xc_section xc'>
+      <view class="input-content">
+        <text>姓名</text>
+        <input value='张庆'  disabled='true'/>
+      </view>
+      <view class="input-content">
+        <text>姓别</text>
+        <picker  bindchange="bindPickerChange" value="{{index}}" range="{{array}}" disabled='true'>
+          <view class="picker">
+          {{array[index]}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content none">
+        <text>身份证号</text>
+        <input value='142555196725632455'  disabled='disabled'/>
+      </view>
+    </view>
+    <view class='xc_section toggle_container'>
+      <radio-group class="radio-group" bindchange="radioChange">
+          <label class="radio" wx:for="{{items}}" wx:key='key'>
+            <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+          </label>
+        </radio-group>
+         <text wx:if='{{panelShowV}}' class='panelShow panelHide' bindtap="panelShow">收起</text>
+        <text wx:if='{{!panelShowV}}' class='panelShow' bindtap="panelShow">展开</text>
+    </view>
+    
+    <view class='xc_section xc ssss'wx:if='{{items[0].checked&&panelShowV}}'>
+      <view class="input-content">
+        <text>出发城市</text>
+        <picker bindchange="bindPickerChangeCity" value="{{page}}" range="{{Array}}" disabled='true'>
+          <view class="picker">
+          {{Array[page]}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content">
+        <text>抵达城市</text>
+        <picker bindchange="bindPickerChangeArrive" value="{{arrive}}" range="{{ArrayArrive}}" disabled='true'>
+          <view class="picker">
+          {{ArrayArrive[arrive]}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content">
+        <text> 出发日期（请提前一天到达）</text>
+        <picker mode="date" value="{{date}}" start="2018-09-01" end="2018-12-01" bindchange="bindDateChange" disabled='true'>
+          <view class="picker">
+            {{date}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content">
+        <text> 出发时间段</text>
+        <picker bindchange="bindPickerChangeUntil" value="{{until}}" range="{{ArrayUntil}}" disabled='true'>
+          <view class="picker">
+          {{ArrayUntil[until]}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content">
+        <text>来程交通方式</text>
+        <picker bindchange="bindPickerChangePlan" value="{{Plan}}" range="{{ArrayPlan}}" disabled='true'>
+          <view class="picker">
+          {{ArrayPlan[Plan]}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content none">
+        <text>选择车次或航班</text>
+        <picker bindchange="bindPickerChangeNumto" value="{{Numto}}" range="{{ArrayNumto}}" disabled='true'>
+          <view class="picker">
+          {{ArrayNumto[Numto]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='xc_section xc' wx:if='{{items[1].checked&&panelShowV}}'>
+      <view class="input-content">
+        <text>出发城市</text>
+        <picker bindchange="bindPickerChangeCityto" value="{{pageTo}}" range="{{Arraycity}}" disabled='true'>
+          <view class="picker">
+          {{Arraycity[pageTo]}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content">
+        <text>抵达城市</text>
+        <picker bindchange="bindPickerChangeArriveto" value="{{arriveTo}}" range="{{ArrayArriveto}}" disabled='true'>
+          <view class="picker">
+          {{ArrayArriveto[arriveTo]}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content">
+        <text> 出发日期（请提前一天到达）</text>
+        <picker mode="date" value="{{dateto}}" start="2018-11-01" end="2019-03-01" bindchange="bindDateChangeto" disabled='true'>
+          <view class="picker">
+            {{dateto}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content">
+        <text> 出发时间段</text>
+        <picker bindchange="bindPickerChangeUntilto" value="{{untilto}}" range="{{ArrayUntilto}}" disabled='true'>
+          <view class="picker">
+          {{ArrayUntilto[untilto]}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content">
+        <text>来程交通方式</text>
+        <picker bindchange="bindPickerChangePlanto" value="{{Planto}}" range="{{ArrayPlanto}}" disabled='true'>
+          <view class="picker">
+          {{ArrayPlanto[Planto]}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content">
+        <text>选择车次或航班</text>
+        <picker bindchange="bindPickerChangeNum" value="{{Num}}" range="{{ArrayNum}}" disabled='true'>
+          <view class="picker">
+          {{ArrayNum[Num]}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content">
+        <text> 回城日期</text>
+        <picker mode="date" value="{{go}}" start="2018-09-01" end="2018-12-31" bindchange="bindDateChangeGo" disabled='true'>
+          <view class="picker">
+            {{go}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content">
+        <text> 回城时间段</text>
+        <picker bindchange="bindPickerChangePlaneto" value="{{planeto}}" range="{{ArrayPlaneto}}" disabled='true'>
+          <view class="picker">
+          {{ArrayPlaneto[planeto]}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content">
+        <text>回程交通方式</text>
+        <picker bindchange="bindPickerChangeWay" value="{{way}}" range="{{ArrayWay}}" disabled='true'>
+          <view class="picker">
+          {{ArrayWay[way]}}
+          </view>
+        </picker>
+      </view>
+      <view class="input-content none">
+        <text>回城车次或航班</text>
+        <picker bindchange="bindPickerChangeFly" value="{{Fly}}" range="{{ArrayFly}}" disabled='true'>
+          <view class="picker">
+          {{ArrayFly[Fly]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class='xc_section xc sec'>
+      <text>您需要会务组知晓的其他情况（车次、换乘、转机）：</text>
+      <view class="page-section">
+        <view class="textarea-wrp">
+          <textarea auto-focus="true" placeholder='北京-湖南 转机' disabled='true'/>
+        </view>
+      </view>
+    </view>
+    
+  </view>
+</view>
